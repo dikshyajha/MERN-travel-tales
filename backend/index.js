@@ -21,12 +21,12 @@ const userRouter = require("./modules/user/router");
 const authRouter = require("./modules/authentication/router");
 const adminRouter = require("./modules/admin/router");
 const blogpostRouter = require("./modules/blogpost/router");
-
+const savedpostRouter = require("./modules/savedpost/router")
 app.use("/user", userRouter);
 app.use("/auth", authRouter);
 app.use("/admin", adminRouter);
 app.use("/blogpost", blogpostRouter);
-
+app.use("/savedpost", savedpostRouter);
 app.get("", (req, res) => {
   res.send("Backend is working");
 });

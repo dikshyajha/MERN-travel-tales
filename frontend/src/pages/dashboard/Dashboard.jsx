@@ -9,6 +9,9 @@ import {
     faSave,
     faCog,
     faSignOutAlt,
+    faHeart,
+    faComment,
+    faBookmark
 } from "@fortawesome/free-solid-svg-icons";
 import { Card, Collapse } from "@mantine/core";
 import axios from "axios";
@@ -30,10 +33,6 @@ export const Dashboard = () => {
         }
     };
 
-    // useEffect(() => {
-    //   handleSignout();
-    // }, []);
-
     const getBlogs = async () => {
         try {
             const res = await axios.get("http://localhost:8888/blogpost/create");
@@ -49,6 +48,19 @@ export const Dashboard = () => {
         getBlogs();
     }, []);
 
+
+    const handleSavePost = async (postId) => {
+        try {
+            await axios.post(`http://localhost:8888/posts/save`, { postId }, {
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem("token")}`
+                }
+            });
+            alert("Post saved successfully!");
+        } catch (error) {
+            console.error("Error saving post:", error);
+        }
+    };
     const toggleExpandDescriptions = (index) => {
         setExpandedDescriptions((prevState) => ({
             ...prevState,
@@ -146,30 +158,41 @@ export const Dashboard = () => {
                 <div className="container mx-auto">
                     <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
                         {blogs.map((blog, index) => (
-                            <div
-                                key={index}
-                                className="bg-white shadow-md rounded-lg overflow-hidden">
+                            <div key={blog._id} className="bg-white shadow-md rounded-lg overflow-hidden">
                                 <img
                                     className="w-full h-56 object-cover"
-                                    // src="https://cdn.pixabay.com/photo/2022/03/24/07/54/nepal-7088480_1280.jpg"
                                     src={`http://localhost:8888/${blog?.image}`}
                                     alt="Blog Post"
                                 />
-                                <h3 className="flex items-center mb-2 text-black text-lg font-bold "
-                                    style={{ fontFamily: 'Tenor Sans, sans-serif' }}
-                                >
-                                    {blog.author.username}
-                                </h3>
-                                <h2 className="font-bold text-lg text-black mb-2 " style={{ fontFamily: 'Tenor Sans, sans-serif' }}
-                                >{blog.title}</h2>
-                                <Collapse in={expandedDescriptions[index]}>
-                                    <p className="text-gray-700 mb-4">{blog.description}</p>
-                                </Collapse>
-                                <div
-                                    className="text-black font-semibold"
-                                    style={{ fontFamily: 'Assistant, sans-serif' }}
-                                    onClick={() => toggleExpandDescriptions(index)}>
-                                    {expandedDescriptions[index] ? "see less..." : "see more..."}
+                                <div className="p-4">
+                                    <div className="flex justify-between items-center mb-2">
+                                        <h3 className="text-lg font-bold text-black" style={{ fontFamily: 'Tenor Sans, sans-serif' }}>
+                                            {blog.author.username}
+                                        </h3>
+                                        <div className="flex space-x-4 text-black">
+                                            <FontAwesomeIcon icon={faHeart} className="cursor-pointer hover:text-red-500" />
+                                            <FontAwesomeIcon icon={faComment} className="cursor-pointer hover:text-blue-500" />
+                                            <FontAwesomeIcon icon={faBookmark} className="cursor-pointer hover:text-yellow-500" onClick={() => handleSavePost(blog._id)} />// Save post when bookmark clicked
+                                        </div>
+                                    </div>
+                                    <h2 className="text-lg font-bold mb-2 text-black" style={{ fontFamily: 'Tenor Sans, sans-serif' }}>
+                                        {blog.title}
+                                    </h2>
+                                    <Collapse in={expandedDescriptions[index]}>
+                                        {blog.description}
+                                    </Collapse>
+                                    <div
+                                        className="text-black font-semibold mb-2" style={{ fontFamily: 'Assistant, sans-serif' }}
+                                        onClick={() => toggleExpandDescriptions(index)}>
+                                        {expandedDescriptions[index] ? "see less..." : "see more..."}
+                                    </div>
+                                    <div className="px-4 py-2 flex justify-between items-center bg-gray-100">
+                                        <button
+                                            className="text-[#228b22] hover:text-[#176911] focus:outline-none"
+                                            onClick={() => navigate(`/viewPost`)}>
+                                            Read more
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         ))}

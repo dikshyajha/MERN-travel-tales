@@ -13,6 +13,7 @@ import SignUp from "./pages/auth/SignUp";
 import { AdminDashboard } from "./pages/dashboard/AdminDashboard";
 import UserProfile from "./components/common/User/UserProfile";
 import AddPost from "./components/common/User/AddPost";
+// import ViewPost from "./components/common/User/ViewPost";
 
 function App() {
   const token = useSelector((state) => state.tokenReducer.token);
@@ -36,9 +37,9 @@ function App() {
         <Route path="/signin" element={token ? <Navigate to={isAdmin() ? "/admin" : "/dashboard"} /> : <SignIn />} />
         <Route path="/signup" element={token ? <Navigate to="/dashboard" /> : <SignUp />} />
         <Route path="/dashboard/*" element={token ? <Dashboard /> : <Navigate to="/signin" />} />
-        <Route path="/profile/:id" element={<UserProfile />} />
+        <Route path="/profile" element={<UserProfile />} />
         <Route path="/addPost" element={<AddPost />} />
-
+        {/* <Route path="/viewPost" element={<ViewPost />} /> */}
         <Route path="/admin" element={token && isAdmin() ? <AdminDashboard /> : <Navigate to="/signin" />} />
         <Route path="/auth/*" element={token ? <Navigate to={isAdmin() ? "/admin" : "/dashboard"} /> : <AuthLayout />} />
         <Route path="/*" element={<div>404 Not found</div>} />
