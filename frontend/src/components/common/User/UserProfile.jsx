@@ -11,7 +11,9 @@ import {
     faSignOutAlt,
     faTh,
     faFolderPlus,
-    faBookmark
+    faBookmark,
+    faHeart,
+    faComment
 } from "@fortawesome/free-solid-svg-icons";
 import logo2 from "../../../assets/images/logo2.png";
 import axios from "axios";
@@ -233,9 +235,17 @@ const UserProfile = () => {
                             />
 
                             <div className="p-4">
-                                <h3 className="text-lg font-bold mb-2 text-black" style={{ fontFamily: 'Tenor Sans, sans-serif' }}>
-                                    {post.author.username}
-                                </h3>
+                                <div className="flex justify-between items-center mb-2">
+                                    <h3 className="text-lg font-bold mb-2 text-black" style={{ fontFamily: 'Tenor Sans, sans-serif' }}>
+                                        {post.author.username}
+                                    </h3>
+                                    <div className="flex space-x-4 text-black">
+                                        <FontAwesomeIcon icon={faHeart} className="cursor-pointer hover:text-[#228b22]" />
+                                        <FontAwesomeIcon icon={faComment} className="cursor-pointer hover:text-[#228b22]" />
+                                    </div>
+                                </div>
+
+
                                 <h2 className="text-lg font-bold mb-2 text-black" style={{ fontFamily: 'Tenor Sans, sans-serif' }}>
                                     {post.title}
                                 </h2>

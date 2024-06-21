@@ -170,15 +170,25 @@ export const Dashboard = () => {
                                             {blog.author.username}
                                         </h3>
                                         <div className="flex space-x-4 text-black">
-                                            <FontAwesomeIcon icon={faHeart} className="cursor-pointer hover:text-red-500" />
-                                            <FontAwesomeIcon icon={faComment} className="cursor-pointer hover:text-blue-500" />
-                                            <FontAwesomeIcon icon={faBookmark} className="cursor-pointer hover:text-yellow-500" onClick={() => handleSavePost(blog._id)} />
+                                            <FontAwesomeIcon icon={faHeart} className="cursor-pointer hover:text-[#228b22]" />
+                                            <FontAwesomeIcon icon={faComment} className="cursor-pointer hover:text-[#228b22]" />
+                                            <FontAwesomeIcon icon={faBookmark} className="cursor-pointer hover:text-[#228b22]" onClick={() => handleSavePost(blog._id)} />
                                         </div>
                                     </div>
                                     <h2 className="text-lg font-bold mb-2 text-black" style={{ fontFamily: 'Tenor Sans, sans-serif' }}>
                                         {blog.title}
                                     </h2>
-                                    <Collapse in={expandedDescriptions[index]}>
+                                    <div className="text-black font-semibold mb-2" style={{ fontFamily: 'Assistant, sans-serif' }}>
+                                        {blog.description.length > 100 ? `${blog.description.substring(0, 100)}...` : blog.description}
+                                    </div>
+                                    <div className="px-4 py-2 flex justify-between items-center bg-gray-100">
+                                        <button
+                                            className="text-[#228b22] hover:text-[#176911] focus:outline-none"
+                                            onClick={() => navigate(`/viewpost`)}>
+                                            Read more
+                                        </button>
+                                    </div>
+                                    {/* <Collapse in={expandedDescriptions[index]}>
                                         {blog.description}
                                     </Collapse>
                                     <div
@@ -192,7 +202,7 @@ export const Dashboard = () => {
                                             onClick={() => navigate(`/viewPost`)}>
                                             Read more
                                         </button>
-                                    </div>
+                                    </div> */}
                                 </div>
                             </div>
                         ))}
