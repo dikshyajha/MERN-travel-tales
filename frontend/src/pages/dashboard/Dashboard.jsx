@@ -51,7 +51,7 @@ export const Dashboard = () => {
 
     const handleSavePost = async (postId) => {
         try {
-            await axios.post(`http://localhost:8888/posts/save`, { postId }, {
+            await axios.post(`http://localhost:8888/savedpost/save`, { postId }, {
                 headers: {
                     Authorization: `Bearer ${localStorage.getItem("token")}`
                 }
@@ -172,7 +172,7 @@ export const Dashboard = () => {
                                         <div className="flex space-x-4 text-black">
                                             <FontAwesomeIcon icon={faHeart} className="cursor-pointer hover:text-red-500" />
                                             <FontAwesomeIcon icon={faComment} className="cursor-pointer hover:text-blue-500" />
-                                            <FontAwesomeIcon icon={faBookmark} className="cursor-pointer hover:text-yellow-500" onClick={() => handleSavePost(blog._id)} />// Save post when bookmark clicked
+                                            <FontAwesomeIcon icon={faBookmark} className="cursor-pointer hover:text-yellow-500" onClick={() => handleSavePost(blog._id)} />
                                         </div>
                                     </div>
                                     <h2 className="text-lg font-bold mb-2 text-black" style={{ fontFamily: 'Tenor Sans, sans-serif' }}>
