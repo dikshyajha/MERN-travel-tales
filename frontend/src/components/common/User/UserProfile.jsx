@@ -59,14 +59,14 @@ const UserProfile = () => {
             if (view === "saved") {
                 try {
                     const savedResponse = await axios.get(
-                        `http://localhost:8888/posts/saved`,
+                        `http://localhost:8888/savedpost/saved`,
                         {
                             headers: {
                                 Authorization: `Bearer ${localStorage.getItem("token")}`
                             }
                         }
                     );
-                    setSavedPosts(savedResponse.data);
+                    setSavedPosts(savedResponse.data.savedPosts);
                 } catch (err) {
                     console.error("Error fetching saved posts:", err);
                 }
@@ -224,7 +224,7 @@ const UserProfile = () => {
                 </div>
 
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                    {userPosts.map((post) => (
+                    {displayPosts.map((post) => (
                         <div key={post._id} className="bg-white shadow-md rounded-lg overflow-hidden">
                             <img
                                 src={`http://localhost:8888/${post?.image}`}
