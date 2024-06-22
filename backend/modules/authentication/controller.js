@@ -40,6 +40,10 @@ const SignUp = async (req, res) => {
         //     return res.status(400).json({ status: 400, message: 'Invalid email format' });
         // }
 
+        if (!isValidContact(contact)) {
+            return res.status(400).json({ message: 'Invalid contact number format' });
+        }
+
         const emailExists = await schema.findOne({ email });
         if (emailExists) {
             return res.status(400).json({ message: 'User with this email already exists' });
@@ -79,6 +83,11 @@ const SignUp = async (req, res) => {
         });
     }
 };
+
+function isValidContact(contact) {
+    const contactRegex = /^[0-9]{10}$/;
+    return contactRegex.test(contact);
+}
  
 function isValidPassword(password) {
     if (password.length < 8) {

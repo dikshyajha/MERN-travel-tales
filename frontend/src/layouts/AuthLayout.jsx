@@ -20,7 +20,8 @@ export const AuthLayout = () => {
                 <Route path="/admin" element={<AdminDashboard />} />
                 <Route path="/profile" element={<UserProfile />} />
                 <Route path="/addPost" element={<AddPost />} />
-                {/* <Route path="/viewPost" element={<ViewPost />} /> */}
+                {/* <Route path="/editPost" element={<ViewPost />} />
+                <Route path="/viewPost" element={<ViewPost />} /> */}
                 <Route path="/*" element={<div>404 Not found</div>} />
             </Routes>
         </>

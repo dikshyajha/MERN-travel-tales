@@ -1,6 +1,5 @@
 const schema = require("./schema");
 const fs = require("fs");
-
 const create = async (req, res) => {
   const { originalname, path } = req.file;
 
@@ -23,7 +22,7 @@ const create = async (req, res) => {
 };
 
 const getAll = async (req, res) => {
-  const getpost = await schema.find().populate("author", ["username"]);
+  const getpost = await schema.find().populate("author", ["username"]).sort({ createdAt : -1});
   res.status(201).json({ getpost });
 };
 
@@ -47,25 +46,17 @@ const getUserPosts = async (req, res) => {
   } catch (error) {
     res.status(500).json({ message: "Error fetching posts", error });
   }
+};
 
-  // const authorId = "66710d963c6947d43d8421a5"; // Example author ID
-  // const posts = await Post.find({ author: authorId }).populate("author", [
-  //   "username",
-  // ]);
-  // console.log(posts);
-
-  // try {
-  //   const { authorId } = req.params;
-  //   console.log("Author ID:", authorId); // Debugging
-  //   const userPosts = await Post.find({ author: authorId }).populate("author", [
-  //     "username",
-  //   ]);
-  //   console.log("User Posts:", userPosts); // Debugging
-  //   res.status(200).json({ userPosts });
-  // } catch (error) {
-  //   console.error("Error fetching posts:", error); // Debugging
-  //   res.status(500).json({ message: "Error fetching posts", error });
-  // }
+const getMyPosts = async (req, res) => {
+  try {
+    const userPosts = await schema.find({ author: req.user._id, }).populate("author", [
+      "username",
+    ]);
+    res.status(200).json({ userPosts });
+  } catch (error) {
+    res.status(500).json({ message: "Error fetching posts", error });
+  }
 };
 
 const update = async (req, res) => {
@@ -73,34 +64,40 @@ const update = async (req, res) => {
 
   if (req.file) {
     const { originalname, path } = req.file;
-
     const parts = originalname.split(".");
     const ext = parts[parts.length - 1];
-    const newPath = path + "." + ext;
+    newPath = path + "." + ext;
     fs.renameSync(path, newPath);
   }
 
   const { id: editPostId } = req.params;
-  const { description, title, _id } = req.body;
+  const { description, title } = req.body;
 
-  const editPost = await schema.findById({editPostId });
+  const editPost = await schema.findById(editPostId);
 
-  const isAuthor =
-    JSON.stringify(editPost.author._id) === JSON.stringify(req.user.ID);
+  if (!editPost) {
+    return res.status(404).json({
+      message: "Post not found",
+    });
+  }
+
+  const isAuthor = JSON.stringify(editPost.author._id) === JSON.stringify(req.user.id);
 
   if (!isAuthor) {
-    return res.status(500).json({
+    return res.status(403).json({
       message: "You are not the author of this post.",
     });
   }
 
-  await editPost.update({
-    title,
-    description,
-    image: newPath ? newPath : editPost.image,
-  });
+  editPost.title = title;
+  editPost.description = description;
+  if (newPath) {
+    editPost.image = newPath;
+  }
 
-  res.status(201).send({ editPost });
+  await editPost.save();
+
+  res.status(200).send({ editPost });
 };
 
 const remove = async (req, res) => {
@@ -129,4 +126,5 @@ module.exports = {
   update,
   remove,
   getUserPosts,
+  getMyPosts
 };

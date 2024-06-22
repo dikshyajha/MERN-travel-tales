@@ -13,18 +13,19 @@ import SignUp from "./pages/auth/SignUp";
 import { AdminDashboard } from "./pages/dashboard/AdminDashboard";
 import UserProfile from "./components/common/User/UserProfile";
 import AddPost from "./components/common/User/AddPost";
-// import ViewPost from "./components/common/User/ViewPost";
+import ViewPost from "./components/common/User/ViewPost";
+import EditPost from "./components/common/User/EditPost";
 
 function App() {
-  const token = useSelector((state) => state.tokenReducer.token);
+  const token = useSelector((state) => state.tokenReducer.token) || getTokenFromLocalStorage();
   // console.log("Token is ", token);
   const dispatch = useDispatch();
-  useEffect(() => {
-    const isLoggedIn = getTokenFromLocalStorage();
-    if (isLoggedIn) {
-      dispatch(setToken(isLoggedIn))
-    }
-  }, [dispatch]);
+  // useEffect(() => {
+  //   const isLoggedIn = getTokenFromLocalStorage();
+  //   if (isLoggedIn) {
+  //     dispatch(setToken(isLoggedIn))
+  //   }
+  // }, [dispatch]);
 
   const isAdmin = () => {
     const user = JSON.parse(localStorage.getItem('user'));
@@ -37,9 +38,11 @@ function App() {
         <Route path="/signin" element={token ? <Navigate to={isAdmin() ? "/admin" : "/dashboard"} /> : <SignIn />} />
         <Route path="/signup" element={token ? <Navigate to="/dashboard" /> : <SignUp />} />
         <Route path="/dashboard/*" element={token ? <Dashboard /> : <Navigate to="/signin" />} />
-        <Route path="/profile" element={<UserProfile />} />
-        <Route path="/addPost" element={<AddPost />} />
-        {/* <Route path="/viewPost" element={<ViewPost />} /> */}
+        <Route path="/my-posts" element={token ? <Dashboard /> : <Navigate to="/signin" />} />
+        <Route path="/profile" element={token ? <UserProfile /> : <Navigate to="/signin" />} />
+        <Route path="/addPost" element={token ? <AddPost /> : <Navigate to="/signin" />} />
+        <Route path="/editPost/:id" element={token ? <EditPost /> : <Navigate to="/signin" />} />
+        <Route path="/viewPost/:id" element={token ? <ViewPost /> : <Navigate to="/signin" />} />
         <Route path="/admin" element={token && isAdmin() ? <AdminDashboard /> : <Navigate to="/signin" />} />
         <Route path="/auth/*" element={token ? <Navigate to={isAdmin() ? "/admin" : "/dashboard"} /> : <AuthLayout />} />
         <Route path="/*" element={<div>404 Not found</div>} />

@@ -40,24 +40,18 @@ const SignIn = () => {
 
             dispatch(setToken(token)); //dispatch an action(setToken) to redux to save tokennn
             if (user.role === 'admin') {
-
                 navigate('/admin');
             } else {
                 navigate('/dashboard');
             }
         } catch (e) {
-            if (e.response && e.response.status === 401) {
-                setError(e.response.data.message);
-            } else {
-                setError('An error occurred. Please try again.');
-            }
-            console.log(e);
+            // console.log();
+            alert(e.data.message)
         }
     };
 
     return (
         <Container size="xs" style={{ marginTop: '124px' }}>
-
             <Paper withBorder shadow="md" p="xl" radius="md" style={{ background: 'rgba(255, 255, 255, 0.8)' }}>
                 <Title order={2} align="start"
                     style={{ marginBottom: '20px', color: '#228b22', fontFamily: 'Tenor Sans, sans-serif', fontSize: '36px' }}>Sign In</Title>

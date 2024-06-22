@@ -31,10 +31,10 @@ baseAxios.interceptors.response.use(
         return response.data;
     }, // function(response)
     function (error) {
-        const errorVal = error?.response?.data?.error
+        const errorVal = error?.response;
 
         if ([401].includes(error?.response?.status)) {
-            // logoutUser()
+            // logout();
         }
         return Promise.reject(errorVal)
     }, // function(error)

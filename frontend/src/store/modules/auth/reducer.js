@@ -1,7 +1,8 @@
+import { getTokenFromLocalStorage } from "../../../utils/localstorage.helper";
 import { SET_TOKEN } from "./actionTypes";
 
 const initialState = {
-  token: "",
+  token: getTokenFromLocalStorage(),
 };
 
 // action = { payload:'', type:''}

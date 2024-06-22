@@ -55,14 +55,20 @@ const SignUp = () => {
             } else {
                 setError(res?.message || 'Failed to sign up');
             }
-        } catch (error) {
-            if (error.response && error.response.status === 400) {
-                setError(error.response.data.message);
-            } else {
-                console.error(error);
-                setError('An error occurred while signing up');
-            }
+
+        } catch (e) {
+            // console.log();
+            alert(e.data.message)
         }
+        //}catch (error) {
+        //     if (error.response && error.response.status === 400) {
+        //         setError(error.response.data.message);
+        //     } else {
+        //         console.error(error);
+        //         setError('An error occurred while signing up');
+        //     }
+        // }
+
 
     };
 

@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import logo2 from '../../assets/images/logo2.png'
-
+import { logout } from '../../utils/auth.helper'
 export const AdminDashboard = () => {
     const [users, setUsers] = useState([]);
     const [error, setError] = useState(null);
     const navigate = useNavigate();
+
     const fetchUsers = async () => {
         const token = localStorage.getItem('token');
         if (!token) {
@@ -27,23 +28,23 @@ export const AdminDashboard = () => {
     };
 
     useEffect(() => {
-
-
         fetchUsers();
     }, []);
+
     const handleSignout = () => {
         try {
-            localStorage.removeItem('token');
-            localStorage.removeItem('user');
-            navigate('/signin', { replace: true });
+            logout();
+            // localStorage.clear();
+            // window.location.reload();
+            // navigate('/signin');
         } catch (error) {
             console.error('Error signing out:', error);
         }
     };
 
-    if (error) {
-        return <p>Error fetching users: {error.message}</p>;
-    }
+    // if (error) {
+    //     return <p>Error fetching users: {error.message}</p>;
+    // }
 
     return (
         <div className="flex flex-col h-screen">

@@ -3,7 +3,7 @@ import hero2 from '../../assets/images/hero2.jpg'
 import { Button } from '@mantine/core';
 import { Link } from 'react-router-dom';
 import '../../index.css'
-
+1
 export const Hero = () => {
     return (
         <div className="hero fixed inset-0 flex">

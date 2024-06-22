@@ -12,10 +12,12 @@ router
   .get(controller.getAll);
 
 router
-  .route("/create/:id")
+  .route("/:id")
   .get(controller.getById)
   .patch(verifyUser, uploadMiddleware.single("file"), controller.update)
   .delete(verifyUser, controller.remove);
+
+  router.get('my-posts',verifyUser, controller.getMyPosts);
 
 router.route("/getUserPost/:id").get(controller.getUserPosts);
 module.exports = router;
