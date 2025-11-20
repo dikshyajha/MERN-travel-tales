@@ -3,7 +3,7 @@ import { getTokenFromLocalStorage } from "../utils/localstorage.helper";
 
 const baseAxios = axios.create();
 
-baseAxios.defaults.baseURL = "http://localhost:8888";
+baseAxios.defaults.baseURL = "https://travel-tales-blogsite-ztoe.onrender.com";
 
 // Add a request interceptor
 baseAxios.interceptors.request.use(
