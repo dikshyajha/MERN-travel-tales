@@ -1,4 +1,5 @@
-// index.js
+require("dotenv").config();
+
 const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
@@ -85,12 +86,15 @@ io.on("connection", (socket) => {
   });
 });
 
+const PORT = process.env.PORT || 8888;
+const MONGODB_URL = process.env.MONGODB_URL;
+
 // Start backend + connect DB
-http.listen(8888, async () => {
+http.listen(PORT, async () => {
   console.log("Server with Socket.io running on port 8888");
   try {
     await mongoose.connect(
-      "mongodb+srv://admin:admin@cluster0.pgvxv3c.mongodb.net/demo?retryWrites=true&w=majority&appName=Cluster0"
+      MONGODB_URL
     );
     console.log("Database connected");
   } catch (e) {

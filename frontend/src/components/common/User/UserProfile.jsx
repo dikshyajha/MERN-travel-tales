@@ -265,23 +265,26 @@ const UserProfile = () => {
                             />
 
                             <div className="p-4 flex flex-col h-full">
-                                <div className="flex justify-between items-center mb-2">
-                                    <h3 className="text-lg text-black" style={{ fontFamily: 'Tenor Sans, sans-serif' }}>
+                                <div className="flex justify-between mb-2">
+                                    {/* <h3 className="text-lg text-black" style={{ fontFamily: 'Tenor Sans, sans-serif' }}>
                                         {post.author.username}
-                                    </h3>
-                                    <div className="flex space-x-4 text-black">
+                                    </h3> */}
+                                    <h2 className="text-lg mb-2 text-black pt-2" style={{ fontFamily: 'Tenor Sans, sans-serif' }}>
+                                        {post.title}
+                                    </h2>
+                                    <div className="flex  text-black">
                                         {/* <Heart className="cursor-pointer hover:text-[#228b22]" />
                                         <MessageCircle className="cursor-pointer hover:text-[#228b22]" /> */}
                                         {view === "posts" && (
                                             <button
-                                                className="px-4 py-2 rounded-lg bg-[white] text-[#228b22] hover:text-[white] hover:bg-[#228b22] focus:outline-none flex items-center"
+                                                className="px-4 py-2 rounded-lg bg-[white] text-[#228b22] hover:text-[white] hover:bg-[#228b22] focus:outline-none flex items-start mt-2 "
                                                 onClick={() => navigate(`/editPost/${post._id}`)}
                                             >
                                                 <Edit className="" />
                                             </button>
                                         )}{view === "posts" && (
                                             <button
-                                                className="px-4 py-2 rounded-lg bg-[white] text-[#228b22] hover:text-[white] hover:bg-[#228b22] focus:outline-none flex items-center"
+                                                className="px-4 py-2 rounded-lg bg-[white] text-[#228b22] hover:text-[white] hover:bg-[#228b22] focus:outline-none flex items-start mt-2"
                                                 onClick={() => navigate(`/editPost/${post._id}`)}
                                             >
                                                 <Trash className="" />
@@ -291,20 +294,18 @@ const UserProfile = () => {
                                 </div>
 
 
-                                <h2 className="text-lg mb-2 text-black pt-2" style={{ fontFamily: 'Tenor Sans, sans-serif' }}>
-                                    {post.title}
-                                </h2>
-                                <div className="text-black  mb-2 line-clamp-3 pt-2" style={{ fontFamily: 'Tenor Sans, sans-serif' }}>
+
+                                {/* <div className="text-black  mb-2 line-clamp-3 pt-2" style={{ fontFamily: 'Tenor Sans, sans-serif' }}>
                                     {/* {post.description.length > 100 ? `${post.description.substring(0, 100)}...` : post.description} */}
-                                    <div
-                                        dangerouslySetInnerHTML={{
-                                            __html:
-                                                post.description.length > 100
-                                                    ? `${post.description.substring(0, 200)}...`
-                                                    : post.description,
-                                        }}
-                                    />
-                                </div>
+                                {/* <div
+                                    dangerouslySetInnerHTML={{
+                                        __html:
+                                            post.description.length > 100
+                                                ? `${post.description.substring(0, 200)}...`
+                                                : post.description,
+                                    }}
+                                />
+                            // </div> */}
                                 <div className="py-2 flex justify-between items-center">
                                     <button
                                         className=" flex-grow py-2 rounded-lg hover:bg-[#228b22] hover:text-[white] bg-[#beeebe] text-[#228b22] focus:outline-none bottom-0 transition-colors duration-200"
