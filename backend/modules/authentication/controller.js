@@ -1,5 +1,5 @@
 const schema = require('../user/schema');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 const SignIn = async (req, res) => {
     const { username, password } = req.body;
@@ -71,7 +71,7 @@ const SignUp = async (req, res) => {
         res.send({
             status: 201,
             message: 'User created successfully',
-            data:data
+            data: data
         });
     } catch (e) {
         console.error('SignUp error:', e);
@@ -88,7 +88,7 @@ function isValidContact(contact) {
     const contactRegex = /^[0-9]{10}$/;
     return contactRegex.test(contact);
 }
- 
+
 function isValidPassword(password) {
     if (password.length < 8) {
         return false;
