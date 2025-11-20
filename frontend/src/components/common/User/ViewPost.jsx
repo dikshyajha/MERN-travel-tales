@@ -12,7 +12,7 @@ const ViewPost = () => {
     useEffect(() => {
         const fetchPost = async () => {
             try {
-                const response = await axios.get(`http://localhost:8888/blogpost/${id}`);
+                const response = await axios.get(`https://travel-tales-blogsite-ztoe.onrender.com/blogpost/${id}`);
                 setPost(response.data?.singlePost);
             } catch (err) {
                 console.error("Error fetching post:", err);
@@ -38,7 +38,7 @@ const ViewPost = () => {
                     <div className="rounded-lg overflow-hidden mb-4">
                         <img
                             className="w-full h-auto object-cover"
-                            src={`http://localhost:8888/${post.image}`}
+                            src={`https://travel-tales-blogsite-ztoe.onrender.com/${post.image}`}
                             alt={post.title}
                         />
                     </div>

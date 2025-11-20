@@ -6,7 +6,7 @@ import logo2 from "../../assets/images/logo2.png";
 import axios from "axios";
 
 // Connect to backend
-const socket = io("http://localhost:8888");
+const socket = io("https://travel-tales-blogsite-ztoe.onrender.com/");
 
 // Define message type
 interface MessageType {
@@ -43,7 +43,7 @@ export const Chat = () => {
     // Fetch all users except the logged-in user
     const getUsers = async () => {
         try {
-            const res = await axios.get("http://localhost:8888/user");
+            const res = await axios.get("https://travel-tales-blogsite-ztoe.onrender.com/user");
 
             console.log("FULL USER API RESPONSE:", res.data);
 

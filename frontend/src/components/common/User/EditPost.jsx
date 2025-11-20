@@ -47,7 +47,7 @@ export default function EditPost() {
     useEffect(() => {
         const fetchPost = async () => {
             try {
-                const response = await axios.get(`http://localhost:8888/blogpost/${id}`);
+                const response = await axios.get(`https://travel-tales-blogsite-ztoe.onrender.com/blogpost/${id}`);
                 setTitle(response.data?.singlePost?.title);
                 setDescription(response.data?.singlePost?.description);
                 // setTitle(response.data?.singlePost?.title);
@@ -70,7 +70,7 @@ export default function EditPost() {
 
         const configuration = {
             method: "patch",
-            url: "http://localhost:8888/blogpost/" + id,
+            url: "https://travel-tales-blogsite-ztoe.onrender.com/blogpost/" + id,
             headers: {
                 Authorization: `Bearer ${token}`,
             },

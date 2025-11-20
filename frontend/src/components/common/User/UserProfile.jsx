@@ -35,7 +35,7 @@ const UserProfile = () => {
                 setUser(userData);
                 try {
                     const postsResponse = await axios.get(
-                        `http://localhost:8888/blogpost/getUserPost/${userData._id}`
+                        `https://travel-tales-blogsite-ztoe.onrender.com/blogpost/getUserPost/${userData._id}`
                     );
                     setUserPosts(postsResponse.data.userPosts);
                     console.log(postsResponse.data.userPosts);
@@ -63,7 +63,7 @@ const UserProfile = () => {
             if (view === "saved") {
                 try {
                     const savedResponse = await axios.get(
-                        `http://localhost:8888/savedpost/saved`,
+                        `https://travel-tales-blogsite-ztoe.onrender.com/savedpost/saved`,
                         {
                             headers: {
                                 Authorization: `Bearer ${localStorage.getItem("token")}`
@@ -259,7 +259,7 @@ const UserProfile = () => {
                     {(view === "posts" ? userPosts : savedPosts)?.map((post) => (
                         <div key={post._id} className="bg-white shadow-md rounded-lg overflow-hidden">
                             <img
-                                src={`http://localhost:8888/${post?.image}`}
+                                src={`https://travel-tales-blogsite-ztoe.onrender.com/${post?.image}`}
                                 alt={post.title}
                                 className="w-full h-56 object-cover"
                             />

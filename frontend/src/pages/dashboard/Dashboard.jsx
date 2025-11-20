@@ -27,7 +27,7 @@ export const Dashboard = () => {
 
     const getBlogs = async () => {
         try {
-            const res = await axios.get("http://localhost:8888/blogpost/create");
+            const res = await axios.get("https://travel-tales-blogsite-ztoe.onrender.com/blogpost/create");
             setBlogs(res.data.getpost);
         } catch (error) {
             console.error("error fetching blogs. Please try again");
@@ -41,7 +41,7 @@ export const Dashboard = () => {
     const handleSavePost = async (postId) => {
         try {
             await axios.post(
-                `http://localhost:8888/savedpost/save`,
+                `https://travel-tales-blogsite-ztoe.onrender.com/savedpost/save`,
                 { postId },
                 {
                     headers: {
@@ -166,7 +166,7 @@ export const Dashboard = () => {
                                 >
                                     <img
                                         className="w-full h-56 object-cover"
-                                        src={`http://localhost:8888/${blog?.image}`}
+                                        src={`https://travel-tales-blogsite-ztoe.onrender.com/${blog?.image}`}
                                         alt="Blog Post"
                                     />
                                     <div className="p-4 flex flex-col h-full">

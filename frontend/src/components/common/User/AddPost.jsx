@@ -49,7 +49,7 @@ export default function AddPost() {
 
         const configuration = {
             method: "post",
-            url: "http://localhost:8888/blogpost/create",
+            url: "https://travel-tales-blogsite-ztoe.onrender.com/blogpost/create",
             headers: {
                 Authorization: `Bearer ${token}`,
             },
