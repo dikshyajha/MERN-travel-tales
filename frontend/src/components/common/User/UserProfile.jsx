@@ -13,7 +13,7 @@ import {
     //     faComment,
     //     faBookmark
 } from "@fortawesome/free-solid-svg-icons";
-import { Home, Edit, Plus, Save, Settings, LogOut, Heart, MessageCircle, Bookmark, User, Grid, PlusCircle, } from 'react-feather';
+import { Home, Edit, Plus, Save, Settings, LogOut, Heart, MessageCircle, Bookmark, User, Grid, PlusCircle, Trash, } from 'react-feather';
 import logo2 from "../../../assets/images/logo2.png";
 import axios from "axios";
 import { logout } from '../../../utils/auth.helper'
@@ -173,6 +173,14 @@ const UserProfile = () => {
                         <span className="text-xl font-medium">Add Post</span>
                     </NavLink>
 
+                    <NavLink
+                        to="/chat"
+                        className="flex items-center text-black hover:bg-[#228b22] hover:text-white py-2 px-4 rounded-lg transition-colors"
+                        activeClassName="bg-gray-200 text-[#228b22]">
+                        <MessageCircle className="mr-2" />
+                        <span className="text-xl font-medium">Chat</span>
+                    </NavLink>
+
                     {/* Saved */}
                     {/* <NavLink
                         to="/saved"
@@ -264,6 +272,21 @@ const UserProfile = () => {
                                     <div className="flex space-x-4 text-black">
                                         {/* <Heart className="cursor-pointer hover:text-[#228b22]" />
                                         <MessageCircle className="cursor-pointer hover:text-[#228b22]" /> */}
+                                        {view === "posts" && (
+                                            <button
+                                                className="px-4 py-2 rounded-lg bg-[white] text-[#228b22] hover:text-[white] hover:bg-[#228b22] focus:outline-none flex items-center"
+                                                onClick={() => navigate(`/editPost/${post._id}`)}
+                                            >
+                                                <Edit className="" />
+                                            </button>
+                                        )}{view === "posts" && (
+                                            <button
+                                                className="px-4 py-2 rounded-lg bg-[white] text-[#228b22] hover:text-[white] hover:bg-[#228b22] focus:outline-none flex items-center"
+                                                onClick={() => navigate(`/editPost/${post._id}`)}
+                                            >
+                                                <Trash className="" />
+                                            </button>
+                                        )}
                                     </div>
                                 </div>
 
@@ -288,14 +311,7 @@ const UserProfile = () => {
                                         onClick={() => navigate(`/viewpost/${post._id}`)}>
                                         See more
                                     </button>
-                                    {view === "posts" && (
-                                        <button
-                                            className="px-4 py-2 rounded-lg bg-[white] text-[#228b22] hover:text-[white] hover:bg-[#228b22] focus:outline-none flex items-center"
-                                            onClick={() => navigate(`/editPost/${post._id}`)}
-                                        >
-                                            <Edit className="mr-2" />
-                                        </button>
-                                    )}
+
                                 </div>
                             </div>
                         </div>

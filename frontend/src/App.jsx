@@ -15,6 +15,7 @@ import UserProfile from "./components/common/User/UserProfile";
 import AddPost from "./components/common/User/AddPost";
 import ViewPost from "./components/common/User/ViewPost";
 import EditPost from "./components/common/User/EditPost";
+import { Chat } from "./pages/chat/ChatScreen";
 
 function App() {
   const token = useSelector((state) => state.tokenReducer.token) || getTokenFromLocalStorage();
@@ -43,6 +44,10 @@ function App() {
         <Route path="/addPost" element={token ? <AddPost /> : <Navigate to="/signin" />} />
         <Route path="/editPost/:id" element={token ? <EditPost /> : <Navigate to="/signin" />} />
         <Route path="/viewPost/:id" element={token ? <ViewPost /> : <Navigate to="/signin" />} />
+        <Route path="/chat/:id" element={token ? <Chat /> : <Navigate to="/signin" />} />
+        <Route path="/chat" element={token ? <Chat /> : <Navigate to="/signin" />} />
+
+
         <Route path="/admin" element={token && isAdmin() ? <AdminDashboard /> : <Navigate to="/signin" />} />
         <Route path="/auth/*" element={token ? <Navigate to={isAdmin() ? "/admin" : "/dashboard"} /> : <AuthLayout />} />
         <Route path="/*" element={<div>404 Not found</div>} />

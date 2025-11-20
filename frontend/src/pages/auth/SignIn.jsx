@@ -82,7 +82,9 @@ const SignIn = () => {
 
 
                     />
-                    <Group position="right" mt="md">
+
+                    <div className="text-end text-sm cursor-pointer hover:underline cursor pointer" style={{ color: '#228b22' }}>Forgot Password?</div>
+                    <Group position="right" mt="">
                         <Button type="submit" color="#228b22" radius="sm" size="md" style={{ width: '100%', fontFamily: 'Tenor Sans, sans-serif' }}>
                             Sign In
                         </Button>
